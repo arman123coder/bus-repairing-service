@@ -43,6 +43,21 @@ color:black;
 font-size:18px;
 }
 
+.languageBox{
+position:absolute;
+top:20px;
+right:20px;
+z-index:1000;
+}
+
+.languageBox button{
+padding:8px 15px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-left:5px;
+}
+
 .hero{
 height:80vh;
 background:url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200') center/cover;
@@ -169,9 +184,21 @@ font-weight:bold;
 
 <body>
 
+<div class="languageBox">
+
+<button onclick="changeLanguage('english')">
+English
+</button>
+
+<button onclick="changeLanguage('hindi')">
+हिन्दी
+</button>
+
+</div>
+
 <header>
-<h1>Farman Bus Repair Service</h1>
-<p>24x7 Professional Bus Repairing</p>
+<h1 id="title">Farman Bus Repair Service</h1>
+<p id="subtitle">24x7 Professional Bus Repairing</p>
 </header>
 
 <nav>
@@ -181,8 +208,11 @@ font-weight:bold;
 </nav>
 
 <section class="hero">
-<h2>Fast & Trusted Bus Repair</h2>
-<p>Engine Repair • Tyre Service • Emergency Support</p>
+<h2 id="heroTitle">Fast & Trusted Bus Repair</h2>
+
+<p id="heroText">
+Engine Repair • Tyre Service • Emergency Support
+</p>
 
 <a href="tel:+917428069969">
 <button class="btn">Call Now</button>
@@ -192,22 +222,28 @@ font-weight:bold;
 
 <section class="section">
 
-<h2>Our Services</h2>
+<h2 id="serviceHeading">Our Services</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Engine Repair</h3>
-<p>Complete engine repairing with expert mechanics.</p>
+<h3 id="engineTitle">Engine Repair</h3>
+
+<p id="engineText">
+Complete engine repairing with expert mechanics.
+</p>
+
 </div>
 
 <div class="card">
 
-<h3 onclick="toggleTyre()" style="cursor:pointer;">
+<h3 onclick="toggleTyre()" style="cursor:pointer;" id="tyreTitle">
 Tyre Service 
 </h3>
 
-<p>Click to view all tyre services</p>
+<p id="tyreText">
+Click to view all tyre services
+</p>
 
 <div id="tyreList" style="display:none; margin-top:15px; text-align:left;">
 
@@ -242,8 +278,13 @@ Submit Request
 </div>
 
 <div class="card">
-<h3>Emergency Help</h3>
-<p>24 hours roadside emergency bus support.</p>
+
+<h3 id="emergencyTitle">Emergency Help</h3>
+
+<p id="emergencyText">
+24 hours roadside emergency bus support.
+</p>
+
 </div>
 
 </div>
@@ -252,7 +293,7 @@ Submit Request
 
 <section class="contact">
 
-<h2>Contact Us</h2>
+<h2 id="contactTitle">Contact Us</h2>
 
 <p>📞 +91 7428069969</p>
 <p>📧 busrepair@gmail.com</p>
@@ -327,6 +368,90 @@ alert("Location access denied");
 }
 
 );
+
+}
+
+function changeLanguage(lang){
+
+if(lang == "hindi"){
+
+document.getElementById("title").innerHTML =
+"फारमान बस रिपेयर सर्विस";
+
+document.getElementById("subtitle").innerHTML =
+"24x7 प्रोफेशनल बस रिपेयरिंग";
+
+document.getElementById("heroTitle").innerHTML =
+"तेज और भरोसेमंद बस रिपेयर";
+
+document.getElementById("heroText").innerHTML =
+"इंजन रिपेयर • टायर सर्विस • इमरजेंसी सहायता";
+
+document.getElementById("serviceHeading").innerHTML =
+"हमारी सेवाएं";
+
+document.getElementById("engineTitle").innerHTML =
+"इंजन रिपेयर";
+
+document.getElementById("engineText").innerHTML =
+"एक्सपर्ट मैकेनिक द्वारा पूरी इंजन रिपेयरिंग";
+
+document.getElementById("tyreTitle").innerHTML =
+"टायर सर्विस ";
+
+document.getElementById("tyreText").innerHTML =
+"सभी टायर सेवाएं देखने के लिए क्लिक करें";
+
+document.getElementById("emergencyTitle").innerHTML =
+"इमरजेंसी सहायता";
+
+document.getElementById("emergencyText").innerHTML =
+"24 घंटे रोडसाइड बस सहायता";
+
+document.getElementById("contactTitle").innerHTML =
+"संपर्क करें";
+
+}
+
+else{
+
+document.getElementById("title").innerHTML =
+"Farman Bus Repair Service";
+
+document.getElementById("subtitle").innerHTML =
+"24x7 Professional Bus Repairing";
+
+document.getElementById("heroTitle").innerHTML =
+"Fast & Trusted Bus Repair";
+
+document.getElementById("heroText").innerHTML =
+"Engine Repair • Tyre Service • Emergency Support";
+
+document.getElementById("serviceHeading").innerHTML =
+"Our Services";
+
+document.getElementById("engineTitle").innerHTML =
+"Engine Repair";
+
+document.getElementById("engineText").innerHTML =
+"Complete engine repairing with expert mechanics.";
+
+document.getElementById("tyreTitle").innerHTML =
+"Tyre Service ";
+
+document.getElementById("tyreText").innerHTML =
+"Click to view all tyre services";
+
+document.getElementById("emergencyTitle").innerHTML =
+"Emergency Help";
+
+document.getElementById("emergencyText").innerHTML =
+"24 hours roadside emergency bus support.";
+
+document.getElementById("contactTitle").innerHTML =
+"Contact Us";
+
+}
 
 }
 
