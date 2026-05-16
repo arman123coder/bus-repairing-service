@@ -175,10 +175,26 @@ z-index:1000;
 <h3>Engine Repair</h3>
 <p>Complete engine repairing with expert mechanics.</p>
 </div>
-
+  
 <div class="card">
-<h3>Tyre Service</h3>
-<p>Bus tyre puncture and replacement service.</p>
+
+<h3 onclick="toggleTyre()" style="cursor:pointer;">
+Tyre Service ⬇️
+</h3>
+
+<p>Click to view all tyre services</p>
+
+<div id="tyreList" style="display:none; margin-top:15px; text-align:left;">
+
+<p>✔ Change Tyre</p>
+<p>✔ Puncture Repair</p>
+<p>✔ Slip Tyre On Road</p>
+<p>✔ Emergency Tyre Service</p>
+<p>✔ Air Pressure Check</p>
+<p>✔ Wheel Balancing</p>
+
+</div>
+
 </div>
 
 <div class="card">
@@ -206,6 +222,23 @@ z-index:1000;
 <a href="https://wa.me/919876543210" class="whatsapp" target="_blank">
 💬
 </a>
+
+<script>
+
+function toggleTyre(){
+
+var x = document.getElementById("tyreList");
+
+if(x.style.display === "none"){
+x.style.display = "block";
+}
+else{
+x.style.display = "none";
+}
+
+}
+
+</script>
 
 </body>
 </html>
