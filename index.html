@@ -226,14 +226,59 @@ Engine Repair • Tyre Service • Emergency Support
 
 <div class="cards">
 
+<!-- ENGINE REPAIR -->
+
 <div class="card">
-<h3 id="engineTitle">Engine Repair</h3>
+
+<h3 onclick="toggleEngine()" style="cursor:pointer;" id="engineTitle">
+Engine Repair 
+</h3>
 
 <p id="engineText">
-Complete engine repairing with expert mechanics.
+Click to view engine services
+</p>
+
+<div id="engineList" style="display:none; margin-top:15px; text-align:left;">
+
+<select id="engineServiceSelect">
+
+<option>Select Engine Service</option>
+
+<option>Brake Loose / Not Working</option>
+
+<option>Steering Problem</option>
+
+<option>Horn Repair</option>
+
+<option>Engine Oil Leak</option>
+
+<option>Battery Problem</option>
+
+<option>Engine Heating</option>
+
+<option>Clutch Problem</option>
+
+<option>Gear Issue</option>
+
+<option>Light Wiring Repair</option>
+
+<option>Diesel Engine Check</option>
+
+</select>
+
+<button class="submitBtn" onclick="sendEngineWhatsApp()">
+Submit Request
+</button>
+
+<p class="success" id="engineSuccessMsg">
+✅ Request Sent Successfully
 </p>
 
 </div>
+
+</div>
+
+<!-- TYRE SERVICE -->
 
 <div class="card">
 
@@ -277,13 +322,43 @@ Submit Request
 
 </div>
 
+<!-- EMERGENCY -->
+
 <div class="card">
 
-<h3 id="emergencyTitle">Emergency Help</h3>
+<h3 onclick="toggleEmergency()" style="cursor:pointer;" id="emergencyTitle">
+Emergency Help 
+</h3>
 
 <p id="emergencyText">
-24 hours roadside emergency bus support.
+Click to view emergency services
 </p>
+
+<div id="emergencyList" style="display:none; margin-top:15px; text-align:left;">
+
+<select id="emergencyServiceSelect">
+
+<option>Select Emergency Service</option>
+
+<option>Urgent Work</option>
+
+<option>High Paid Emergency Service</option>
+
+<option>Night Emergency Support</option>
+
+<option>Roadside Breakdown Help</option>
+
+</select>
+
+<button class="submitBtn" onclick="sendEmergencyWhatsApp()">
+Submit Request
+</button>
+
+<p class="success" id="emergencySuccessMsg">
+✅ Request Sent Successfully
+</p>
+
+</div>
 
 </div>
 
@@ -323,6 +398,32 @@ x.style.display = "none";
 
 }
 
+function toggleEngine(){
+
+var x = document.getElementById("engineList");
+
+if(x.style.display === "none"){
+x.style.display = "block";
+}
+else{
+x.style.display = "none";
+}
+
+}
+
+function toggleEmergency(){
+
+var x = document.getElementById("emergencyList");
+
+if(x.style.display === "none"){
+x.style.display = "block";
+}
+else{
+x.style.display = "none";
+}
+
+}
+
 function sendWhatsApp(){
 
 var service = document.getElementById("serviceSelect").value;
@@ -340,7 +441,6 @@ navigator.geolocation.getCurrentPosition(
 function(position){
 
 var lat = position.coords.latitude;
-
 var lon = position.coords.longitude;
 
 var locationLink =
@@ -350,7 +450,7 @@ var phone = "917428069969";
 
 var message =
 "Hello, I need " + service +
-" service.%0A%0AMy Location:%0A" + locationLink;
+" tyre service.%0A%0AMy Location:%0A" + locationLink;
 
 var url =
 "https://wa.me/" + phone + "?text=" + message;
@@ -359,11 +459,89 @@ window.open(url, "_blank");
 
 document.getElementById("successMsg").style.display = "block";
 
-},
+}
 
-function(){
+);
 
-alert("Location access denied");
+}
+
+function sendEngineWhatsApp(){
+
+var service =
+document.getElementById("engineServiceSelect").value;
+
+if(service == "Select Engine Service"){
+
+alert("Please select a service");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+var lon = position.coords.longitude;
+
+var locationLink =
+"https://maps.google.com/?q=" + lat + "," + lon;
+
+var phone = "917428069969";
+
+var message =
+"Hello, I need " + service +
+" engine service.%0A%0AMy Location:%0A" + locationLink;
+
+var url =
+"https://wa.me/" + phone + "?text=" + message;
+
+window.open(url, "_blank");
+
+document.getElementById("engineSuccessMsg").style.display = "block";
+
+}
+
+);
+
+}
+
+function sendEmergencyWhatsApp(){
+
+var service =
+document.getElementById("emergencyServiceSelect").value;
+
+if(service == "Select Emergency Service"){
+
+alert("Please select a service");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+var lon = position.coords.longitude;
+
+var locationLink =
+"https://maps.google.com/?q=" + lat + "," + lon;
+
+var phone = "917428069969";
+
+var message =
+"Emergency Request: " + service +
+"%0A%0AMy Location:%0A" + locationLink;
+
+var url =
+"https://wa.me/" + phone + "?text=" + message;
+
+window.open(url, "_blank");
+
+document.getElementById("emergencySuccessMsg").style.display = "block";
 
 }
 
@@ -391,10 +569,10 @@ document.getElementById("serviceHeading").innerHTML =
 "हमारी सेवाएं";
 
 document.getElementById("engineTitle").innerHTML =
-"इंजन रिपेयर";
+"इंजन रिपेयर ";
 
 document.getElementById("engineText").innerHTML =
-"एक्सपर्ट मैकेनिक द्वारा पूरी इंजन रिपेयरिंग";
+"इंजन सेवाएं देखने के लिए क्लिक करें";
 
 document.getElementById("tyreTitle").innerHTML =
 "टायर सर्विस ";
@@ -403,10 +581,10 @@ document.getElementById("tyreText").innerHTML =
 "सभी टायर सेवाएं देखने के लिए क्लिक करें";
 
 document.getElementById("emergencyTitle").innerHTML =
-"इमरजेंसी सहायता";
+"इमरजेंसी सहायता ";
 
 document.getElementById("emergencyText").innerHTML =
-"24 घंटे रोडसाइड बस सहायता";
+"इमरजेंसी सेवाएं देखने के लिए क्लिक करें";
 
 document.getElementById("contactTitle").innerHTML =
 "संपर्क करें";
@@ -431,10 +609,10 @@ document.getElementById("serviceHeading").innerHTML =
 "Our Services";
 
 document.getElementById("engineTitle").innerHTML =
-"Engine Repair";
+"Engine Repair ";
 
 document.getElementById("engineText").innerHTML =
-"Complete engine repairing with expert mechanics.";
+"Click to view engine services";
 
 document.getElementById("tyreTitle").innerHTML =
 "Tyre Service ";
@@ -443,10 +621,10 @@ document.getElementById("tyreText").innerHTML =
 "Click to view all tyre services";
 
 document.getElementById("emergencyTitle").innerHTML =
-"Emergency Help";
+"Emergency Help ";
 
 document.getElementById("emergencyText").innerHTML =
-"24 hours roadside emergency bus support.";
+"Click to view emergency services";
 
 document.getElementById("contactTitle").innerHTML =
 "Contact Us";
