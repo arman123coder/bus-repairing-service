@@ -204,7 +204,7 @@ font-weight:bold;
 <div class="card">
 
 <h3 onclick="toggleTyre()" style="cursor:pointer;">
-Tyre Service 
+Tyre Service ⬇️
 </h3>
 
 <p>Click to view all tyre services</p>
@@ -294,15 +294,39 @@ return;
 
 }
 
-document.getElementById("successMsg").style.display = "block";
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+
+var lon = position.coords.longitude;
+
+var locationLink =
+"https://maps.google.com/?q=" + lat + "," + lon;
 
 var phone = "917428069969";
 
-var message = "Hello, I need " + service + " service.";
+var message =
+"Hello, I need " + service +
+" service.%0A%0AMy Location:%0A" + locationLink;
 
-var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+var url =
+"https://wa.me/" + phone + "?text=" + message;
 
 window.open(url, "_blank");
+
+document.getElementById("successMsg").style.display = "block";
+
+},
+
+function(){
+
+alert("Location access denied");
+
+}
+
+);
 
 }
 
