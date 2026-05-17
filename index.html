@@ -160,12 +160,13 @@ box-shadow:0 0 10px rgba(0,0,0,0.3);
 z-index:1000;
 }
 
-select{
+select,input{
 width:100%;
 padding:14px;
 margin-top:10px;
 border-radius:8px;
 font-size:16px;
+border:1px solid #999;
 }
 
 .submitBtn{
@@ -247,6 +248,10 @@ Engine Repair
 Click to view engine services
 </p>
 
+<input type="text" id="engineName" placeholder="Enter Your Name">
+
+<input type="tel" id="enginePhone" placeholder="Enter Mobile Number">
+
 <select id="engineServiceSelect">
 
 <option>Select Engine Service</option>
@@ -295,6 +300,10 @@ Tyre Service
 Click to view all tyre services
 </p>
 
+<input type="text" id="tyreName" placeholder="Enter Your Name">
+
+<input type="tel" id="tyrePhone" placeholder="Enter Mobile Number">
+
 <select id="serviceSelect">
 
 <option>Select Service</option>
@@ -334,6 +343,10 @@ Emergency Help
 <p id="emergencyText">
 Click to view emergency services
 </p>
+
+<input type="text" id="emergencyName" placeholder="Enter Your Name">
+
+<input type="tel" id="emergencyPhone" placeholder="Enter Mobile Number">
 
 <select id="emergencyServiceSelect">
 
@@ -384,14 +397,13 @@ Submit Request
 
 function sendWhatsApp(){
 
+var name = document.getElementById("tyreName").value;
+var phoneNumber = document.getElementById("tyrePhone").value;
 var service = document.getElementById("serviceSelect").value;
 
-if(service == "Select Service"){
-
-alert("Please select a service");
-
+if(name=="" || phoneNumber==""){
+alert("Please fill all details");
 return;
-
 }
 
 navigator.geolocation.getCurrentPosition(
@@ -407,8 +419,10 @@ var locationLink =
 var phone = "917428069969";
 
 var message =
-"Hello, I need " + service +
-" tyre service.%0A%0AMy Location:%0A" + locationLink;
+"Customer Name: " + name +
+"%0AMobile: " + phoneNumber +
+"%0ATyre Service: " + service +
+"%0ALocation: " + locationLink;
 
 var url =
 "https://wa.me/" + phone + "?text=" + message;
@@ -425,15 +439,15 @@ document.getElementById("successMsg").style.display = "block";
 
 function sendEngineWhatsApp(){
 
+var name = document.getElementById("engineName").value;
+var phoneNumber = document.getElementById("enginePhone").value;
+
 var service =
 document.getElementById("engineServiceSelect").value;
 
-if(service == "Select Engine Service"){
-
-alert("Please select a service");
-
+if(name=="" || phoneNumber==""){
+alert("Please fill all details");
 return;
-
 }
 
 navigator.geolocation.getCurrentPosition(
@@ -449,8 +463,10 @@ var locationLink =
 var phone = "917428069969";
 
 var message =
-"Hello, I need " + service +
-" engine service.%0A%0AMy Location:%0A" + locationLink;
+"Customer Name: " + name +
+"%0AMobile: " + phoneNumber +
+"%0AEngine Service: " + service +
+"%0ALocation: " + locationLink;
 
 var url =
 "https://wa.me/" + phone + "?text=" + message;
@@ -467,15 +483,15 @@ document.getElementById("engineSuccessMsg").style.display = "block";
 
 function sendEmergencyWhatsApp(){
 
+var name = document.getElementById("emergencyName").value;
+var phoneNumber = document.getElementById("emergencyPhone").value;
+
 var service =
 document.getElementById("emergencyServiceSelect").value;
 
-if(service == "Select Emergency Service"){
-
-alert("Please select a service");
-
+if(name=="" || phoneNumber==""){
+alert("Please fill all details");
 return;
-
 }
 
 navigator.geolocation.getCurrentPosition(
@@ -491,8 +507,10 @@ var locationLink =
 var phone = "917428069969";
 
 var message =
-"Emergency Request: " + service +
-"%0A%0AMy Location:%0A" + locationLink;
+"Customer Name: " + name +
+"%0AMobile: " + phoneNumber +
+"%0AEmergency Service: " + service +
+"%0ALocation: " + locationLink;
 
 var url =
 "https://wa.me/" + phone + "?text=" + message;
@@ -530,7 +548,7 @@ document.getElementById("engineTitle").innerHTML =
 "इंजन रिपेयर";
 
 document.getElementById("engineText").innerHTML =
-"इंजन सेवाएं देखने के लिए नीचे चुनें";
+"इंजन सेवाएं नीचे चुनें";
 
 document.getElementById("tyreTitle").innerHTML =
 "टायर सर्विस";
