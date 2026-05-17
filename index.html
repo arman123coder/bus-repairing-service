@@ -16,7 +16,39 @@ font-family:Arial;
 
 body{
 background:#f5f5f5;
+transition:0.5s;
 }
+
+/* DARK MODE */
+
+.dark-mode{
+background:#111;
+color:white;
+}
+
+.dark-mode .card{
+background:#1f1f1f;
+color:white;
+box-shadow:0 0 15px rgba(255,255,255,0.1);
+}
+
+.dark-mode header{
+background:black;
+}
+
+.dark-mode nav{
+background:#222;
+}
+
+.dark-mode footer{
+background:#000;
+}
+
+.dark-mode .contact{
+background:#1a1a1a;
+}
+
+/* HEADER */
 
 header{
 background:#111;
@@ -28,6 +60,8 @@ text-align:center;
 header h1{
 font-size:40px;
 }
+
+/* NAV */
 
 nav{
 background:orange;
@@ -42,6 +76,8 @@ font-weight:bold;
 color:black;
 font-size:18px;
 }
+
+/* LANGUAGE BUTTON */
 
 .languageBox{
 position:absolute;
@@ -59,6 +95,24 @@ margin-left:5px;
 font-weight:bold;
 }
 
+/* DARK BUTTON */
+
+.darkBtn{
+position:fixed;
+top:20px;
+left:20px;
+padding:10px 18px;
+border:none;
+border-radius:10px;
+background:black;
+color:white;
+font-weight:bold;
+cursor:pointer;
+z-index:9999;
+}
+
+/* HERO */
+
 .hero{
 height:80vh;
 background:url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200') center/cover;
@@ -74,8 +128,6 @@ text-align:center;
 font-size:50px;
 background:rgba(0,0,0,0.6);
 padding:10px;
-border-radius:10px;
-animation:fadeIn 1s ease;
 }
 
 .hero p{
@@ -83,9 +135,9 @@ font-size:22px;
 margin-top:10px;
 background:rgba(0,0,0,0.6);
 padding:10px;
-border-radius:10px;
-animation:fadeIn 1.5s ease;
 }
+
+/* BUTTON */
 
 .btn{
 margin-top:20px;
@@ -103,6 +155,8 @@ transform:scale(1.05);
 background:#ff9800;
 }
 
+/* SECTION */
+
 .section{
 padding:60px 20px;
 text-align:center;
@@ -112,6 +166,8 @@ text-align:center;
 font-size:50px;
 margin-bottom:40px;
 }
+
+/* CARDS */
 
 .cards{
 display:flex;
@@ -124,32 +180,15 @@ gap:20px;
 background:white;
 width:320px;
 padding:25px;
-border-radius:20px;
-box-shadow:0 0 15px rgba(0,0,0,0.2);
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 transition:0.4s;
-animation:fadeIn 1s ease;
-position:relative;
-overflow:hidden;
+animation:fadeUp 1s ease;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 15px 25px rgba(0,0,0,0.3);
-}
-
-.card::before{
-content:'';
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:5px;
-background:orange;
-transition:0.5s;
-}
-
-.card:hover::before{
-left:0;
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px rgba(255,165,0,0.5);
 }
 
 .card h3{
@@ -162,6 +201,8 @@ margin-bottom:20px;
 font-size:18px;
 }
 
+/* CONTACT */
+
 .contact{
 background:#111;
 color:white;
@@ -169,12 +210,16 @@ padding:50px;
 text-align:center;
 }
 
+/* FOOTER */
+
 footer{
 background:black;
 color:white;
 text-align:center;
 padding:20px;
 }
+
+/* WHATSAPP */
 
 .whatsapp{
 position:fixed;
@@ -192,12 +237,9 @@ align-items:center;
 text-decoration:none;
 box-shadow:0 0 10px rgba(0,0,0,0.3);
 z-index:1000;
-transition:0.3s;
 }
 
-.whatsapp:hover{
-transform:scale(1.1);
-}
+/* INPUT */
 
 select,input{
 width:100%;
@@ -206,14 +248,6 @@ margin-top:10px;
 border-radius:8px;
 font-size:16px;
 border:1px solid #999;
-transition:0.3s;
-}
-
-input:focus,
-select:focus{
-border:2px solid orange;
-outline:none;
-box-shadow:0 0 10px rgba(255,165,0,0.5);
 }
 
 input[type="file"]{
@@ -225,6 +259,8 @@ border-radius:8px;
 background:white;
 font-size:15px;
 }
+
+/* SUBMIT */
 
 .submitBtn{
 width:100%;
@@ -243,6 +279,8 @@ transform:scale(1.05);
 background:#ff9800;
 }
 
+/* SUCCESS */
+
 .success{
 display:none;
 color:green;
@@ -250,16 +288,45 @@ margin-top:10px;
 font-weight:bold;
 }
 
-@keyframes fadeIn{
+/* ANIMATION */
+
+@keyframes fadeUp{
 
 from{
 opacity:0;
-transform:translateY(30px);
+transform:translateY(40px);
 }
 
 to{
 opacity:1;
-transform:translateY(0px);
+transform:translateY(0);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h2{
+font-size:35px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.section h2{
+font-size:35px;
+}
+
+.card{
+width:100%;
+}
+
+nav a{
+display:block;
+margin:10px 0;
 }
 
 }
@@ -269,6 +336,10 @@ transform:translateY(0px);
 </head>
 
 <body>
+
+<button onclick="toggleDarkMode()" class="darkBtn">
+🌙 Dark Mode
+</button>
 
 <div class="languageBox">
 
@@ -315,13 +386,9 @@ Engine Repair • Tyre Service • Emergency Support
 
 <div class="card">
 
-<h3>
-Engine Repair
-</h3>
+<h3>Engine Repair</h3>
 
-<p>
-Select engine service & upload vehicle image
-</p>
+<p>Select engine service & upload vehicle image</p>
 
 <input type="text" placeholder="Enter Your Name">
 
@@ -337,20 +404,6 @@ Select engine service & upload vehicle image
 
 <option>Horn Repair</option>
 
-<option>Engine Oil Leak</option>
-
-<option>Battery Problem</option>
-
-<option>Engine Heating</option>
-
-<option>Clutch Problem</option>
-
-<option>Gear Issue</option>
-
-<option>Light Wiring Repair</option>
-
-<option>Diesel Engine Check</option>
-
 </select>
 
 <label style="display:block; margin-top:15px; font-weight:bold;">
@@ -367,13 +420,9 @@ Submit Request
 
 <div class="card">
 
-<h3>
-Tyre Service
-</h3>
+<h3>Tyre Service</h3>
 
-<p>
-Select tyre service & upload vehicle image
-</p>
+<p>Select tyre service & upload vehicle image</p>
 
 <input type="text" placeholder="Enter Your Name">
 
@@ -387,13 +436,7 @@ Select tyre service & upload vehicle image
 
 <option>Puncture Repair</option>
 
-<option>Slip Tyre On Road</option>
-
 <option>Emergency Tyre Service</option>
-
-<option>Air Pressure Check</option>
-
-<option>Wheel Balancing</option>
 
 </select>
 
@@ -411,13 +454,9 @@ Submit Request
 
 <div class="card">
 
-<h3>
-Emergency Help
-</h3>
+<h3>Emergency Help</h3>
 
-<p>
-Select emergency service & upload vehicle image
-</p>
+<p>Select emergency service & upload vehicle image</p>
 
 <input type="text" placeholder="Enter Your Name">
 
@@ -429,11 +468,7 @@ Select emergency service & upload vehicle image
 
 <option>Urgent Work</option>
 
-<option>High Paid Emergency Service</option>
-
 <option>Night Emergency Support</option>
-
-<option>Roadside Breakdown Help</option>
 
 </select>
 
@@ -469,6 +504,16 @@ Submit Request
 <a href="https://wa.me/917428069969" class="whatsapp" target="_blank">
 💬
 </a>
+
+<script>
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+}
+
+</script>
 
 </body>
 </html>
