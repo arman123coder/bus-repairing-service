@@ -56,6 +56,7 @@ border:none;
 border-radius:5px;
 cursor:pointer;
 margin-left:5px;
+font-weight:bold;
 }
 
 .hero{
@@ -98,8 +99,8 @@ text-align:center;
 }
 
 .section h2{
-font-size:40px;
-margin-bottom:30px;
+font-size:50px;
+margin-bottom:40px;
 }
 
 .cards{
@@ -111,7 +112,7 @@ gap:20px;
 
 .card{
 background:white;
-width:300px;
+width:320px;
 padding:25px;
 border-radius:15px;
 box-shadow:0 0 10px rgba(0,0,0,0.2);
@@ -119,6 +120,12 @@ box-shadow:0 0 10px rgba(0,0,0,0.2);
 
 .card h3{
 margin-bottom:15px;
+font-size:32px;
+}
+
+.card p{
+margin-bottom:20px;
+font-size:18px;
 }
 
 .contact{
@@ -155,19 +162,20 @@ z-index:1000;
 
 select{
 width:100%;
-padding:10px;
-margin-top:15px;
+padding:14px;
+margin-top:10px;
 border-radius:8px;
+font-size:16px;
 }
 
 .submitBtn{
 width:100%;
-padding:12px;
+padding:14px;
 margin-top:15px;
 background:orange;
 border:none;
 border-radius:8px;
-font-size:18px;
+font-size:22px;
 cursor:pointer;
 }
 
@@ -208,6 +216,7 @@ English
 </nav>
 
 <section class="hero">
+
 <h2 id="heroTitle">Fast & Trusted Bus Repair</h2>
 
 <p id="heroText">
@@ -226,19 +235,17 @@ Engine Repair • Tyre Service • Emergency Support
 
 <div class="cards">
 
-<!-- ENGINE REPAIR -->
+<!-- ENGINE -->
 
 <div class="card">
 
-<h3 onclick="toggleEngine()" style="cursor:pointer;" id="engineTitle">
-Engine Repair 
+<h3 id="engineTitle">
+Engine Repair
 </h3>
 
 <p id="engineText">
 Click to view engine services
 </p>
-
-<div id="engineList" style="display:none; margin-top:15px; text-align:left;">
 
 <select id="engineServiceSelect">
 
@@ -276,21 +283,17 @@ Submit Request
 
 </div>
 
-</div>
-
-<!-- TYRE SERVICE -->
+<!-- TYRE -->
 
 <div class="card">
 
-<h3 onclick="toggleTyre()" style="cursor:pointer;" id="tyreTitle">
-Tyre Service 
+<h3 id="tyreTitle">
+Tyre Service
 </h3>
 
 <p id="tyreText">
 Click to view all tyre services
 </p>
-
-<div id="tyreList" style="display:none; margin-top:15px; text-align:left;">
 
 <select id="serviceSelect">
 
@@ -320,21 +323,17 @@ Submit Request
 
 </div>
 
-</div>
-
 <!-- EMERGENCY -->
 
 <div class="card">
 
-<h3 onclick="toggleEmergency()" style="cursor:pointer;" id="emergencyTitle">
-Emergency Help 
+<h3 id="emergencyTitle">
+Emergency Help
 </h3>
 
 <p id="emergencyText">
 Click to view emergency services
 </p>
-
-<div id="emergencyList" style="display:none; margin-top:15px; text-align:left;">
 
 <select id="emergencyServiceSelect">
 
@@ -362,8 +361,6 @@ Submit Request
 
 </div>
 
-</div>
-
 </section>
 
 <section class="contact">
@@ -384,45 +381,6 @@ Submit Request
 </a>
 
 <script>
-
-function toggleTyre(){
-
-var x = document.getElementById("tyreList");
-
-if(x.style.display === "none"){
-x.style.display = "block";
-}
-else{
-x.style.display = "none";
-}
-
-}
-
-function toggleEngine(){
-
-var x = document.getElementById("engineList");
-
-if(x.style.display === "none"){
-x.style.display = "block";
-}
-else{
-x.style.display = "none";
-}
-
-}
-
-function toggleEmergency(){
-
-var x = document.getElementById("emergencyList");
-
-if(x.style.display === "none"){
-x.style.display = "block";
-}
-else{
-x.style.display = "none";
-}
-
-}
 
 function sendWhatsApp(){
 
@@ -569,22 +527,22 @@ document.getElementById("serviceHeading").innerHTML =
 "हमारी सेवाएं";
 
 document.getElementById("engineTitle").innerHTML =
-"इंजन रिपेयर ";
+"इंजन रिपेयर";
 
 document.getElementById("engineText").innerHTML =
-"इंजन सेवाएं देखने के लिए क्लिक करें";
+"इंजन सेवाएं देखने के लिए नीचे चुनें";
 
 document.getElementById("tyreTitle").innerHTML =
-"टायर सर्विस ";
+"टायर सर्विस";
 
 document.getElementById("tyreText").innerHTML =
-"सभी टायर सेवाएं देखने के लिए क्लिक करें";
+"नीचे टायर सेवा चुनें";
 
 document.getElementById("emergencyTitle").innerHTML =
-"इमरजेंसी सहायता ";
+"इमरजेंसी सहायता";
 
 document.getElementById("emergencyText").innerHTML =
-"इमरजेंसी सेवाएं देखने के लिए क्लिक करें";
+"नीचे इमरजेंसी सेवा चुनें";
 
 document.getElementById("contactTitle").innerHTML =
 "संपर्क करें";
@@ -609,19 +567,19 @@ document.getElementById("serviceHeading").innerHTML =
 "Our Services";
 
 document.getElementById("engineTitle").innerHTML =
-"Engine Repair ";
+"Engine Repair";
 
 document.getElementById("engineText").innerHTML =
 "Click to view engine services";
 
 document.getElementById("tyreTitle").innerHTML =
-"Tyre Service ";
+"Tyre Service";
 
 document.getElementById("tyreText").innerHTML =
 "Click to view all tyre services";
 
 document.getElementById("emergencyTitle").innerHTML =
-"Emergency Help ";
+"Emergency Help";
 
 document.getElementById("emergencyText").innerHTML =
 "Click to view emergency services";
