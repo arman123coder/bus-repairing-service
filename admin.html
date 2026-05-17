@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farman Admin Panel</title>
+<title>Farman Premium Admin Panel</title>
 
 <style>
 
@@ -15,427 +15,266 @@ font-family:Arial;
 }
 
 body{
-background:#0f172a;
+background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+min-height:100vh;
+padding:30px;
 color:white;
-padding:20px;
 }
 
-.header{
-background:linear-gradient(45deg,#ff9800,#ff5722);
-padding:25px;
-border-radius:20px;
+.adminBox{
+max-width:1200px;
+margin:auto;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:25px;
+box-shadow:0 0 30px rgba(0,0,0,0.4);
+animation:fade 1s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0px);
+}
+}
+
+h1{
+text-align:center;
+font-size:45px;
+margin-bottom:10px;
+color:#facc15;
+}
+
+.sub{
 text-align:center;
 margin-bottom:30px;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
+font-size:18px;
+color:#ddd;
 }
 
-.header h1{
-font-size:38px;
-}
-
-.stats{
+.topCards{
 display:flex;
-flex-wrap:wrap;
 gap:20px;
-justify-content:center;
+flex-wrap:wrap;
 margin-bottom:30px;
 }
 
-.card{
-width:300px;
+.infoCard{
+flex:1;
+min-width:220px;
+background:linear-gradient(135deg,#f59e0b,#f97316);
 padding:25px;
 border-radius:20px;
-cursor:pointer;
-transition:0.3s;
-box-shadow:0 0 15px rgba(0,0,0,0.3);
+color:white;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+transition:0.4s;
 }
 
-.card:hover{
-transform:scale(1.05);
+.infoCard:hover{
+transform:translateY(-8px) scale(1.03);
 }
 
-.total{
-background:linear-gradient(45deg,#3b82f6,#06b6d4);
-}
-
-.pending{
-background:linear-gradient(45deg,#ff9800,#ff5722);
-}
-
-.complete{
-background:linear-gradient(45deg,#22c55e,#16a34a);
-}
-
-.card h2{
+.infoCard h2{
 font-size:35px;
 margin-bottom:10px;
 }
 
-.card p{
-font-size:20px;
-}
-
-.dataBox{
-display:none;
-background:#1e293b;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
-}
-
-.dataBox h3{
-font-size:28px;
-margin-bottom:20px;
-color:#ff9800;
-}
-
-.request{
-background:#334155;
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-}
-
-.status{
-padding:6px 15px;
-border-radius:20px;
-font-size:14px;
+.infoCard p{
+font-size:18px;
 font-weight:bold;
 }
 
-.pendingStatus{
-background:orange;
+.tableBox{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+overflow:hidden;
+border-radius:20px;
+background:white;
 color:black;
 }
 
-.completeStatus{
-background:#22c55e;
-color:white;
+th{
+background:#f59e0b;
+padding:18px;
+font-size:18px;
 }
 
-.btn{
-padding:12px 20px;
-border:none;
-border-radius:10px;
+td{
+padding:16px;
+text-align:center;
+border-bottom:1px solid #ddd;
 font-size:16px;
+}
+
+tr{
+transition:0.3s;
+}
+
+tr:hover{
+background:#fff7ed;
+}
+
+.mapBtn{
+background:#16a34a;
+color:white;
+padding:10px 18px;
+border-radius:8px;
+text-decoration:none;
 font-weight:bold;
-cursor:pointer;
-margin-top:15px;
+display:inline-block;
+transition:0.3s;
 }
 
-.completeBtn{
+.mapBtn:hover{
+background:#15803d;
+transform:scale(1.05);
+}
+
+.status{
+padding:8px 14px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
+color:white;
 background:#22c55e;
-color:white;
+display:inline-block;
 }
 
-.deleteBtn{
-background:red;
-color:white;
-margin-left:10px;
+@media(max-width:768px){
+
+body{
+padding:15px;
 }
 
-.request img{
-width:100%;
-max-width:300px;
-border-radius:15px;
-margin-top:15px;
-border:3px solid orange;
+h1{
+font-size:32px;
 }
 
-@media(max-width:700px){
-
-.card{
-width:100%;
-}
-
-.header h1{
+.infoCard h2{
 font-size:28px;
+}
+
+th,td{
+padding:10px;
+font-size:14px;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="header">
+<div class="adminBox">
+
 <h1>🚍 Farman Admin Panel</h1>
-<p>Manage All Customer Requests</p>
-</div>
 
-<div class="stats">
+<p class="sub">
+Live Booking Requests & Customer Details
+</p>
 
-<div class="card total" onclick="showBox('totalBox')">
-<h2 id="totalCount">3</h2>
+<div class="topCards">
+
+<div class="infoCard">
+<h2>128</h2>
 <p>Total Requests</p>
 </div>
 
-<div class="card pending" onclick="showBox('pendingBox')">
-<h2 id="pendingCount">2</h2>
+<div class="infoCard">
+<h2>89</h2>
+<p>Completed Works</p>
+</div>
+
+<div class="infoCard">
+<h2>39</h2>
 <p>Pending Requests</p>
 </div>
 
-<div class="card complete" onclick="showBox('completeBox')">
-<h2 id="completeCount">1</h2>
-<p>Complete Work</p>
 </div>
 
-</div>
+<div class="tableBox">
 
-<!-- TOTAL REQUESTS -->
+<table>
 
-<div class="dataBox" id="totalBox">
+<thead>
 
-<h3>📋 Total Requests</h3>
+<tr>
+<th>Customer</th>
+<th>Mobile</th>
+<th>Repair Work</th>
+<th>Status</th>
+<th>Location</th>
+</tr>
 
-<div class="request">
+</thead>
 
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-">
+<tbody id="adminData">
 
-<h2 style="font-size:24px;color:#ff9800;">
-🚍 Customer Request
-</h2>
-
-<span class="status pendingStatus">
-Pending
-</span>
-
-</div>
-
-<div style="line-height:35px;font-size:18px;">
-
-<b>👤 Customer Name:</b> Rahul Sharma <br>
-
-<b>📞 Contact Number:</b> 9876543210 <br>
-
-<b>🛠 Repair Work:</b> Engine Repair <br>
-
-<b>📍 Location:</b> Delhi Highway <br>
-
-<b>🕒 Request Time:</b> 10:45 AM <br>
-
-</div>
-
-<img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=800">
-
-<div>
-
-<button class="btn completeBtn" onclick="markComplete(this)">
-✅ Complete
-</button>
-
-<button class="btn deleteBtn" onclick="deleteRequest(this)">
-🗑 Delete
-</button>
-
-</div>
-
-</div>
-
-<div class="request">
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-">
-
-<h2 style="font-size:24px;color:#ff9800;">
-🚍 Customer Request
-</h2>
-
-<span class="status completeStatus">
+<tr>
+<td>Rahul Sharma</td>
+<td>9876543210</td>
+<td>Tyre Repair</td>
+<td>
+<span class="status">
 Completed
 </span>
+</td>
+<td>
+<a href="#" class="mapBtn" target="_blank">
+Open Map
+</a>
+</td>
+</tr>
 
-</div>
-
-<div style="line-height:35px;font-size:18px;">
-
-<b>👤 Customer Name:</b> Aman Singh <br>
-
-<b>📞 Contact Number:</b> 9999999999 <br>
-
-<b>🛠 Repair Work:</b> Tyre Service <br>
-
-<b>📍 Location:</b> Jaipur Road <br>
-
-<b>🕒 Request Time:</b> 1:30 PM <br>
-
-</div>
-
-<img src="https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?q=80&w=800">
-
-<div>
-
-<button class="btn deleteBtn" onclick="deleteRequest(this)">
-🗑 Delete
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PENDING -->
-
-<div class="dataBox" id="pendingBox">
-
-<h3>⏳ Pending Requests</h3>
-
-<div class="request">
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-">
-
-<h2 style="font-size:24px;color:#ff9800;">
-🚍 Pending Customer
-</h2>
-
-<span class="status pendingStatus">
+<tr>
+<td>Aman Singh</td>
+<td>9123456780</td>
+<td>Engine Repair</td>
+<td>
+<span class="status">
 Pending
 </span>
+</td>
+<td>
+<a href="#" class="mapBtn" target="_blank">
+Open Map
+</a>
+</td>
+</tr>
 
-</div>
-
-<div style="line-height:35px;font-size:18px;">
-
-<b>👤 Customer Name:</b> Mohit Kumar <br>
-
-<b>📞 Contact Number:</b> 8888888888 <br>
-
-<b>🛠 Repair Work:</b> Emergency Help <br>
-
-<b>📍 Location:</b> Agra Highway <br>
-
-<b>🕒 Request Time:</b> 8:10 PM <br>
-
-</div>
-
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800">
-
-<div>
-
-<button class="btn completeBtn" onclick="markComplete(this)">
-✅ Complete
-</button>
-
-<button class="btn deleteBtn" onclick="deleteRequest(this)">
-🗑 Delete
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- COMPLETE -->
-
-<div class="dataBox" id="completeBox">
-
-<h3>✅ Completed Work</h3>
-
-<div class="request">
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-">
-
-<h2 style="font-size:24px;color:#22c55e;">
-✅ Completed Customer
-</h2>
-
-<span class="status completeStatus">
+<tr>
+<td>Imran Khan</td>
+<td>9988776655</td>
+<td>Emergency Help</td>
+<td>
+<span class="status">
 Completed
 </span>
+</td>
+<td>
+<a href="#" class="mapBtn" target="_blank">
+Open Map
+</a>
+</td>
+</tr>
 
-</div>
+</tbody>
 
-<div style="line-height:35px;font-size:18px;">
-
-<b>👤 Customer Name:</b> Suresh Yadav <br>
-
-<b>📞 Contact Number:</b> 7777777777 <br>
-
-<b>🛠 Repair Work:</b> Brake Repair <br>
-
-<b>📍 Location:</b> Lucknow <br>
-
-<b>🕒 Request Time:</b> 4:00 PM <br>
-
-</div>
-
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800">
-
-<div>
-
-<button class="btn deleteBtn" onclick="deleteRequest(this)">
-🗑 Delete
-</button>
+</table>
 
 </div>
 
 </div>
-
-</div>
-
-<script>
-
-function showBox(id){
-
-document.getElementById("totalBox").style.display="none";
-document.getElementById("pendingBox").style.display="none";
-document.getElementById("completeBox").style.display="none";
-
-document.getElementById(id).style.display="block";
-
-}
-
-function markComplete(button){
-
-let request = button.parentElement.parentElement;
-
-let status = request.querySelector(".status");
-
-status.innerHTML = "Completed";
-
-status.classList.remove("pendingStatus");
-
-status.classList.add("completeStatus");
-
-button.remove();
-
-alert("Work Marked As Complete");
-
-}
-
-function deleteRequest(button){
-
-button.parentElement.parentElement.remove();
-
-alert("Request Deleted");
-
-}
-
-</script>
 
 </body>
 </html>
