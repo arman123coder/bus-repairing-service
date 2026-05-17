@@ -169,6 +169,16 @@ font-size:16px;
 border:1px solid #999;
 }
 
+input[type="file"]{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:1px solid #999;
+border-radius:8px;
+background:white;
+font-size:15px;
+}
+
 .submitBtn{
 width:100%;
 padding:14px;
@@ -245,7 +255,7 @@ Engine Repair
 </h3>
 
 <p id="engineText">
-Click to view engine services
+Select engine service & upload vehicle image
 </p>
 
 <input type="text" id="engineName" placeholder="Enter Your Name">
@@ -278,6 +288,12 @@ Click to view engine services
 
 </select>
 
+<label style="display:block; margin-top:15px; font-weight:bold;">
+Upload Vehicle Image
+</label>
+
+<input type="file" accept="image/*">
+
 <button class="submitBtn" onclick="sendEngineWhatsApp()">
 Submit Request
 </button>
@@ -297,7 +313,7 @@ Tyre Service
 </h3>
 
 <p id="tyreText">
-Click to view all tyre services
+Select tyre service & upload vehicle image
 </p>
 
 <input type="text" id="tyreName" placeholder="Enter Your Name">
@@ -322,6 +338,12 @@ Click to view all tyre services
 
 </select>
 
+<label style="display:block; margin-top:15px; font-weight:bold;">
+Upload Vehicle Image
+</label>
+
+<input type="file" accept="image/*">
+
 <button class="submitBtn" onclick="sendWhatsApp()">
 Submit Request
 </button>
@@ -341,7 +363,7 @@ Emergency Help
 </h3>
 
 <p id="emergencyText">
-Click to view emergency services
+Select emergency service & upload vehicle image
 </p>
 
 <input type="text" id="emergencyName" placeholder="Enter Your Name">
@@ -361,6 +383,12 @@ Click to view emergency services
 <option>Roadside Breakdown Help</option>
 
 </select>
+
+<label style="display:block; margin-top:15px; font-weight:bold;">
+Upload Vehicle Image
+</label>
+
+<input type="file" accept="image/*">
 
 <button class="submitBtn" onclick="sendEmergencyWhatsApp()">
 Submit Request
@@ -392,224 +420,6 @@ Submit Request
 <a href="https://wa.me/917428069969" class="whatsapp" target="_blank">
 💬
 </a>
-
-<script>
-
-function sendWhatsApp(){
-
-var name = document.getElementById("tyreName").value;
-var phoneNumber = document.getElementById("tyrePhone").value;
-var service = document.getElementById("serviceSelect").value;
-
-if(name=="" || phoneNumber==""){
-alert("Please fill all details");
-return;
-}
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-var lat = position.coords.latitude;
-var lon = position.coords.longitude;
-
-var locationLink =
-"https://maps.google.com/?q=" + lat + "," + lon;
-
-var phone = "917428069969";
-
-var message =
-"Customer Name: " + name +
-"%0AMobile: " + phoneNumber +
-"%0ATyre Service: " + service +
-"%0ALocation: " + locationLink;
-
-var url =
-"https://wa.me/" + phone + "?text=" + message;
-
-window.open(url, "_blank");
-
-document.getElementById("successMsg").style.display = "block";
-
-}
-
-);
-
-}
-
-function sendEngineWhatsApp(){
-
-var name = document.getElementById("engineName").value;
-var phoneNumber = document.getElementById("enginePhone").value;
-
-var service =
-document.getElementById("engineServiceSelect").value;
-
-if(name=="" || phoneNumber==""){
-alert("Please fill all details");
-return;
-}
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-var lat = position.coords.latitude;
-var lon = position.coords.longitude;
-
-var locationLink =
-"https://maps.google.com/?q=" + lat + "," + lon;
-
-var phone = "917428069969";
-
-var message =
-"Customer Name: " + name +
-"%0AMobile: " + phoneNumber +
-"%0AEngine Service: " + service +
-"%0ALocation: " + locationLink;
-
-var url =
-"https://wa.me/" + phone + "?text=" + message;
-
-window.open(url, "_blank");
-
-document.getElementById("engineSuccessMsg").style.display = "block";
-
-}
-
-);
-
-}
-
-function sendEmergencyWhatsApp(){
-
-var name = document.getElementById("emergencyName").value;
-var phoneNumber = document.getElementById("emergencyPhone").value;
-
-var service =
-document.getElementById("emergencyServiceSelect").value;
-
-if(name=="" || phoneNumber==""){
-alert("Please fill all details");
-return;
-}
-
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-var lat = position.coords.latitude;
-var lon = position.coords.longitude;
-
-var locationLink =
-"https://maps.google.com/?q=" + lat + "," + lon;
-
-var phone = "917428069969";
-
-var message =
-"Customer Name: " + name +
-"%0AMobile: " + phoneNumber +
-"%0AEmergency Service: " + service +
-"%0ALocation: " + locationLink;
-
-var url =
-"https://wa.me/" + phone + "?text=" + message;
-
-window.open(url, "_blank");
-
-document.getElementById("emergencySuccessMsg").style.display = "block";
-
-}
-
-);
-
-}
-
-function changeLanguage(lang){
-
-if(lang == "hindi"){
-
-document.getElementById("title").innerHTML =
-"फारमान बस रिपेयर सर्विस";
-
-document.getElementById("subtitle").innerHTML =
-"24x7 प्रोफेशनल बस रिपेयरिंग";
-
-document.getElementById("heroTitle").innerHTML =
-"तेज और भरोसेमंद बस रिपेयर";
-
-document.getElementById("heroText").innerHTML =
-"इंजन रिपेयर • टायर सर्विस • इमरजेंसी सहायता";
-
-document.getElementById("serviceHeading").innerHTML =
-"हमारी सेवाएं";
-
-document.getElementById("engineTitle").innerHTML =
-"इंजन रिपेयर";
-
-document.getElementById("engineText").innerHTML =
-"इंजन सेवाएं नीचे चुनें";
-
-document.getElementById("tyreTitle").innerHTML =
-"टायर सर्विस";
-
-document.getElementById("tyreText").innerHTML =
-"नीचे टायर सेवा चुनें";
-
-document.getElementById("emergencyTitle").innerHTML =
-"इमरजेंसी सहायता";
-
-document.getElementById("emergencyText").innerHTML =
-"नीचे इमरजेंसी सेवा चुनें";
-
-document.getElementById("contactTitle").innerHTML =
-"संपर्क करें";
-
-}
-
-else{
-
-document.getElementById("title").innerHTML =
-"Farman Bus Repair Service";
-
-document.getElementById("subtitle").innerHTML =
-"24x7 Professional Bus Repairing";
-
-document.getElementById("heroTitle").innerHTML =
-"Fast & Trusted Bus Repair";
-
-document.getElementById("heroText").innerHTML =
-"Engine Repair • Tyre Service • Emergency Support";
-
-document.getElementById("serviceHeading").innerHTML =
-"Our Services";
-
-document.getElementById("engineTitle").innerHTML =
-"Engine Repair";
-
-document.getElementById("engineText").innerHTML =
-"Click to view engine services";
-
-document.getElementById("tyreTitle").innerHTML =
-"Tyre Service";
-
-document.getElementById("tyreText").innerHTML =
-"Click to view all tyre services";
-
-document.getElementById("emergencyTitle").innerHTML =
-"Emergency Help";
-
-document.getElementById("emergencyText").innerHTML =
-"Click to view emergency services";
-
-document.getElementById("contactTitle").innerHTML =
-"Contact Us";
-
-}
-
-}
-
-</script>
 
 </body>
 </html>
