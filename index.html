@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Farman Bus Repair</title>
 
 <style>
@@ -75,24 +76,6 @@ margin:15px;
 font-weight:bold;
 color:black;
 font-size:18px;
-}
-
-/* LANGUAGE BUTTON */
-
-.languageBox{
-position:absolute;
-top:20px;
-right:20px;
-z-index:1000;
-}
-
-.languageBox button{
-padding:8px 15px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-margin-left:5px;
-font-weight:bold;
 }
 
 /* DARK BUTTON */
@@ -341,27 +324,22 @@ margin:10px 0;
 🌙 Dark Mode
 </button>
 
-<div class="languageBox">
-
-<button>
-English
-</button>
-
-<button>
-हिन्दी
-</button>
-
-</div>
-
 <header>
+
 <h1>Farman Bus Repair Service</h1>
+
 <p>24x7 Professional Bus Repairing</p>
+
 </header>
 
 <nav>
+
 <a href="">Home</a>
+
 <a href="">Services</a>
+
 <a href="">Contact</a>
+
 </nav>
 
 <section class="hero">
@@ -373,7 +351,11 @@ Engine Repair • Tyre Service • Emergency Support
 </p>
 
 <a href="tel:+917428069969">
-<button class="btn">Call Now</button>
+
+<button class="btn">
+Call Now
+</button>
+
 </a>
 
 </section>
@@ -384,17 +366,19 @@ Engine Repair • Tyre Service • Emergency Support
 
 <div class="cards">
 
+<!-- ENGINE -->
+
 <div class="card">
 
 <h3>Engine Repair</h3>
 
 <p>Select engine service & upload vehicle image</p>
 
-<input type="text" placeholder="Enter Your Name">
+<input type="text" id="engineName" placeholder="Enter Your Name">
 
-<input type="tel" placeholder="Enter Mobile Number">
+<input type="tel" id="enginePhone" placeholder="Enter Mobile Number">
 
-<select>
+<select id="engineService">
 
 <option>Select Engine Service</option>
 
@@ -404,6 +388,8 @@ Engine Repair • Tyre Service • Emergency Support
 
 <option>Horn Repair</option>
 
+<option>Engine Heating</option>
+
 </select>
 
 <label style="display:block; margin-top:15px; font-weight:bold;">
@@ -412,11 +398,17 @@ Upload Vehicle Image
 
 <input type="file" accept="image/*">
 
-<button class="submitBtn">
+<button class="submitBtn" onclick="sendEngineRequest()">
 Submit Request
 </button>
 
+<p class="success" id="engineSuccess">
+✅ Request Sent Successfully
+</p>
+
 </div>
+
+<!-- TYRE -->
 
 <div class="card">
 
@@ -424,11 +416,11 @@ Submit Request
 
 <p>Select tyre service & upload vehicle image</p>
 
-<input type="text" placeholder="Enter Your Name">
+<input type="text" id="tyreName" placeholder="Enter Your Name">
 
-<input type="tel" placeholder="Enter Mobile Number">
+<input type="tel" id="tyrePhone" placeholder="Enter Mobile Number">
 
-<select>
+<select id="tyreService">
 
 <option>Select Service</option>
 
@@ -446,11 +438,17 @@ Upload Vehicle Image
 
 <input type="file" accept="image/*">
 
-<button class="submitBtn">
+<button class="submitBtn" onclick="sendTyreRequest()">
 Submit Request
 </button>
 
+<p class="success" id="tyreSuccess">
+✅ Request Sent Successfully
+</p>
+
 </div>
+
+<!-- EMERGENCY -->
 
 <div class="card">
 
@@ -458,11 +456,11 @@ Submit Request
 
 <p>Select emergency service & upload vehicle image</p>
 
-<input type="text" placeholder="Enter Your Name">
+<input type="text" id="emergencyName" placeholder="Enter Your Name">
 
-<input type="tel" placeholder="Enter Mobile Number">
+<input type="tel" id="emergencyPhone" placeholder="Enter Mobile Number">
 
-<select>
+<select id="emergencyService">
 
 <option>Select Emergency Service</option>
 
@@ -478,9 +476,13 @@ Upload Vehicle Image
 
 <input type="file" accept="image/*">
 
-<button class="submitBtn">
+<button class="submitBtn" onclick="sendEmergencyRequest()">
 Submit Request
 </button>
+
+<p class="success" id="emergencySuccess">
+✅ Request Sent Successfully
+</p>
 
 </div>
 
@@ -493,12 +495,15 @@ Submit Request
 <h2>Contact Us</h2>
 
 <p>📞 +91 7428069969</p>
+
 <p>📧 busrepair@gmail.com</p>
 
 </section>
 
 <footer>
+
 © 2026 Farman Bus Repair Service
+
 </footer>
 
 <a href="https://wa.me/917428069969" class="whatsapp" target="_blank">
@@ -507,9 +512,167 @@ Submit Request
 
 <script>
 
+/* DARK MODE */
+
 function toggleDarkMode(){
 
 document.body.classList.toggle("dark-mode");
+
+}
+
+/* ENGINE REQUEST */
+
+function sendEngineRequest(){
+
+var name =
+document.getElementById("engineName").value;
+
+var phone =
+document.getElementById("enginePhone").value;
+
+var service =
+document.getElementById("engineService").value;
+
+if(name=="" || phone==""){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+
+var lon = position.coords.longitude;
+
+var location =
+"https://maps.google.com/?q="+lat+","+lon;
+
+var message =
+"🚍 ENGINE REQUEST %0A%0A"+
+"👤 Name: "+name+
+"%0A📞 Mobile: "+phone+
+"%0A🔧 Service: "+service+
+"%0A📍 Location: "+location;
+
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
+
+document.getElementById("engineSuccess").style.display="block";
+
+}
+
+);
+
+}
+
+/* TYRE REQUEST */
+
+function sendTyreRequest(){
+
+var name =
+document.getElementById("tyreName").value;
+
+var phone =
+document.getElementById("tyrePhone").value;
+
+var service =
+document.getElementById("tyreService").value;
+
+if(name=="" || phone==""){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+
+var lon = position.coords.longitude;
+
+var location =
+"https://maps.google.com/?q="+lat+","+lon;
+
+var message =
+"🛞 TYRE REQUEST %0A%0A"+
+"👤 Name: "+name+
+"%0A📞 Mobile: "+phone+
+"%0A🔧 Service: "+service+
+"%0A📍 Location: "+location;
+
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
+
+document.getElementById("tyreSuccess").style.display="block";
+
+}
+
+);
+
+}
+
+/* EMERGENCY REQUEST */
+
+function sendEmergencyRequest(){
+
+var name =
+document.getElementById("emergencyName").value;
+
+var phone =
+document.getElementById("emergencyPhone").value;
+
+var service =
+document.getElementById("emergencyService").value;
+
+if(name=="" || phone==""){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+var lat = position.coords.latitude;
+
+var lon = position.coords.longitude;
+
+var location =
+"https://maps.google.com/?q="+lat+","+lon;
+
+var message =
+"🚨 EMERGENCY REQUEST %0A%0A"+
+"👤 Name: "+name+
+"%0A📞 Mobile: "+phone+
+"%0A⚠ Service: "+service+
+"%0A📍 Location: "+location;
+
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
+
+document.getElementById("emergencySuccess").style.display="block";
+
+}
+
+);
 
 }
 
