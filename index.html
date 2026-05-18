@@ -111,6 +111,7 @@ text-align:center;
 font-size:50px;
 background:rgba(0,0,0,0.6);
 padding:10px;
+border-radius:10px;
 }
 
 .hero p{
@@ -118,6 +119,7 @@ font-size:22px;
 margin-top:10px;
 background:rgba(0,0,0,0.6);
 padding:10px;
+border-radius:10px;
 }
 
 /* BUTTON */
@@ -266,8 +268,11 @@ background:#ff9800;
 
 .success{
 display:none;
+background:#d4edda;
 color:green;
-margin-top:10px;
+padding:12px;
+margin-top:15px;
+border-radius:8px;
 font-weight:bold;
 }
 
@@ -559,12 +564,18 @@ var message =
 "%0A🔧 Service: "+service+
 "%0A📍 Location: "+location;
 
-window.open(
-"https://wa.me/917428069969?text="+message,
-"_blank"
-);
+var whatsappURL =
+"https://wa.me/917428069969?text="+message;
+
+window.location.href = whatsappURL;
 
 document.getElementById("engineSuccess").style.display="block";
+
+},
+
+function(){
+
+alert("Location permission allow karo");
 
 }
 
@@ -611,12 +622,18 @@ var message =
 "%0A🔧 Service: "+service+
 "%0A📍 Location: "+location;
 
-window.open(
-"https://wa.me/917428069969?text="+message,
-"_blank"
-);
+var whatsappURL =
+"https://wa.me/917428069969?text="+message;
+
+window.location.href = whatsappURL;
 
 document.getElementById("tyreSuccess").style.display="block";
+
+},
+
+function(){
+
+alert("Location permission allow karo");
 
 }
 
@@ -663,12 +680,18 @@ var message =
 "%0A⚠ Service: "+service+
 "%0A📍 Location: "+location;
 
-window.open(
-"https://wa.me/917428069969?text="+message,
-"_blank"
-);
+var whatsappURL =
+"https://wa.me/917428069969?text="+message;
+
+window.location.href = whatsappURL;
 
 document.getElementById("emergencySuccess").style.display="block";
+
+},
+
+function(){
+
+alert("Location permission allow karo");
 
 }
 
