@@ -401,7 +401,7 @@ Call Now
 Upload Vehicle Image
 </label>
 
-<input type="file" accept="image/*">
+<input type="file" id="engineImage" accept="image/*">
 
 <button class="submitBtn" onclick="sendEngineRequest()">
 Submit Request
@@ -441,7 +441,7 @@ Submit Request
 Upload Vehicle Image
 </label>
 
-<input type="file" accept="image/*">
+<input type="file" id="tyreImage" accept="image/*">
 
 <button class="submitBtn" onclick="sendTyreRequest()">
 Submit Request
@@ -479,7 +479,7 @@ Submit Request
 Upload Vehicle Image
 </label>
 
-<input type="file" accept="image/*">
+<input type="file" id="emergencyImage" accept="image/*">
 
 <button class="submitBtn" onclick="sendEmergencyRequest()">
 Submit Request
@@ -517,6 +517,14 @@ Submit Request
 
 <script>
 
+/* SUPABASE */
+
+const SUPABASE_URL =
+"https://zbtbergrssadohsglxcu.supabase.co/rest/v1/requests";
+
+const API_KEY =
+"sb_publishable_8s-IHRSQFLnyZ7HaNOcG4Q_FsHKWQ0N";
+
 /* DARK MODE */
 
 function toggleDarkMode(){
@@ -525,7 +533,46 @@ document.body.classList.toggle("dark-mode");
 
 }
 
-/* ENGINE REQUEST */
+/* SAVE DATA */
+
+async function saveRequest(type,name,phone,service,location,image){
+
+try{
+
+await fetch(SUPABASE_URL,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"apikey":API_KEY,
+"Authorization":"Bearer "+API_KEY,
+"Prefer":"return=minimal"
+},
+
+body:JSON.stringify({
+
+type:type,
+name:name,
+phone:phone,
+service:service,
+location:location,
+image:image,
+status:"Pending"
+
+})
+
+});
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+/* ENGINE */
 
 function sendEngineRequest(){
 
@@ -538,6 +585,9 @@ document.getElementById("enginePhone").value;
 var service =
 document.getElementById("engineService").value;
 
+var image =
+document.getElementById("engineImage").files[0];
+
 if(name=="" || phone==""){
 
 alert("Please fill all details");
@@ -548,7 +598,7 @@ return;
 
 navigator.geolocation.getCurrentPosition(
 
-function(position){
+async function(position){
 
 var lat = position.coords.latitude;
 
@@ -557,17 +607,30 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
+var imageName =
+image ? image.name : "No Image";
+
+await saveRequest(
+"Engine",
+name,
+phone,
+service,
+location,
+imageName
+);
+
 var message =
 "🚍 ENGINE REQUEST %0A%0A"+
 "👤 Name: "+name+
 "%0A📞 Mobile: "+phone+
 "%0A🔧 Service: "+service+
-"%0A📍 Location: "+location;
+"%0A📍 Location: "+location+
+"%0A🖼 Vehicle Image: "+imageName;
 
-var whatsappURL =
-"https://wa.me/917428069969?text="+message;
-
-window.location.href = whatsappURL;
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
 
 document.getElementById("engineSuccess").style.display="block";
 
@@ -583,7 +646,7 @@ alert("Location permission allow karo");
 
 }
 
-/* TYRE REQUEST */
+/* TYRE */
 
 function sendTyreRequest(){
 
@@ -596,6 +659,9 @@ document.getElementById("tyrePhone").value;
 var service =
 document.getElementById("tyreService").value;
 
+var image =
+document.getElementById("tyreImage").files[0];
+
 if(name=="" || phone==""){
 
 alert("Please fill all details");
@@ -606,7 +672,7 @@ return;
 
 navigator.geolocation.getCurrentPosition(
 
-function(position){
+async function(position){
 
 var lat = position.coords.latitude;
 
@@ -615,17 +681,30 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
+var imageName =
+image ? image.name : "No Image";
+
+await saveRequest(
+"Tyre",
+name,
+phone,
+service,
+location,
+imageName
+);
+
 var message =
 "🛞 TYRE REQUEST %0A%0A"+
 "👤 Name: "+name+
 "%0A📞 Mobile: "+phone+
 "%0A🔧 Service: "+service+
-"%0A📍 Location: "+location;
+"%0A📍 Location: "+location+
+"%0A🖼 Vehicle Image: "+imageName;
 
-var whatsappURL =
-"https://wa.me/917428069969?text="+message;
-
-window.location.href = whatsappURL;
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
 
 document.getElementById("tyreSuccess").style.display="block";
 
@@ -641,7 +720,7 @@ alert("Location permission allow karo");
 
 }
 
-/* EMERGENCY REQUEST */
+/* EMERGENCY */
 
 function sendEmergencyRequest(){
 
@@ -654,6 +733,9 @@ document.getElementById("emergencyPhone").value;
 var service =
 document.getElementById("emergencyService").value;
 
+var image =
+document.getElementById("emergencyImage").files[0];
+
 if(name=="" || phone==""){
 
 alert("Please fill all details");
@@ -664,7 +746,7 @@ return;
 
 navigator.geolocation.getCurrentPosition(
 
-function(position){
+async function(position){
 
 var lat = position.coords.latitude;
 
@@ -673,17 +755,30 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
+var imageName =
+image ? image.name : "No Image";
+
+await saveRequest(
+"Emergency",
+name,
+phone,
+service,
+location,
+imageName
+);
+
 var message =
 "🚨 EMERGENCY REQUEST %0A%0A"+
 "👤 Name: "+name+
 "%0A📞 Mobile: "+phone+
 "%0A⚠ Service: "+service+
-"%0A📍 Location: "+location;
+"%0A📍 Location: "+location+
+"%0A🖼 Vehicle Image: "+imageName;
 
-var whatsappURL =
-"https://wa.me/917428069969?text="+message;
-
-window.location.href = whatsappURL;
+window.open(
+"https://wa.me/917428069969?text="+message,
+"_blank"
+);
 
 document.getElementById("emergencySuccess").style.display="block";
 
