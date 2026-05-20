@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Farman Bus Repair</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <style>
 
@@ -340,9 +343,7 @@ margin:10px 0;
 <nav>
 
 <a href="">Home</a>
-
 <a href="">Services</a>
-
 <a href="">Contact</a>
 
 </nav>
@@ -386,13 +387,9 @@ Call Now
 <select id="engineService">
 
 <option>Select Engine Service</option>
-
 <option>Brake Loose / Not Working</option>
-
 <option>Steering Problem</option>
-
 <option>Horn Repair</option>
-
 <option>Engine Heating</option>
 
 </select>
@@ -428,11 +425,8 @@ Submit Request
 <select id="tyreService">
 
 <option>Select Service</option>
-
 <option>Change Tyre</option>
-
 <option>Puncture Repair</option>
-
 <option>Emergency Tyre Service</option>
 
 </select>
@@ -468,9 +462,7 @@ Submit Request
 <select id="emergencyService">
 
 <option>Select Emergency Service</option>
-
 <option>Urgent Work</option>
-
 <option>Night Emergency Support</option>
 
 </select>
@@ -520,10 +512,16 @@ Submit Request
 /* SUPABASE */
 
 const SUPABASE_URL =
-"https://zbtbergrssadohsglxcu.supabase.co/rest/v1/requests";
+"https://zbtbergrssadohsglxcu.supabase.co";
 
-const API_KEY =
+const SUPABASE_KEY =
 "sb_publishable_8s-IHRSQFLnyZ7HaNOcG4Q_FsHKWQ0N";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 /* DARK MODE */
 
@@ -539,14 +537,16 @@ async function saveRequest(type,name,phone,service,location,image){
 
 try{
 
-await fetch(SUPABASE_URL,{
+await fetch(
+SUPABASE_URL + "/rest/v1/requests",
+{
 
 method:"POST",
 
 headers:{
 "Content-Type":"application/json",
-"apikey":API_KEY,
-"Authorization":"Bearer "+API_KEY,
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer "+SUPABASE_KEY,
 "Prefer":"return=minimal"
 },
 
@@ -572,9 +572,45 @@ console.log(error);
 
 }
 
+/* IMAGE UPLOAD */
+
+async function uploadImage(file){
+
+if(!file){
+
+return "No Image";
+
+}
+
+var fileName =
+Date.now() + "-" + file.name;
+
+const { data , error } =
+await supabaseClient
+.storage
+.from("vehicle-images")
+.upload(fileName,file);
+
+if(error){
+
+console.log(error);
+
+return "Upload Failed";
+
+}
+
+var imageURL =
+SUPABASE_URL +
+"/storage/v1/object/public/vehicle-images/" +
+fileName;
+
+return imageURL;
+
+}
+
 /* ENGINE */
 
-function sendEngineRequest(){
+async function sendEngineRequest(){
 
 var name =
 document.getElementById("engineName").value;
@@ -607,8 +643,8 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
-var imageName =
-image ? image.name : "No Image";
+var imageURL =
+await uploadImage(image);
 
 await saveRequest(
 "Engine",
@@ -616,7 +652,7 @@ name,
 phone,
 service,
 location,
-imageName
+imageURL
 );
 
 var message =
@@ -625,7 +661,7 @@ var message =
 "%0A📞 Mobile: "+phone+
 "%0A🔧 Service: "+service+
 "%0A📍 Location: "+location+
-"%0A🖼 Vehicle Image: "+imageName;
+"%0A🖼 Vehicle Image: "+imageURL;
 
 window.open(
 "https://wa.me/917428069969?text="+message,
@@ -633,12 +669,6 @@ window.open(
 );
 
 document.getElementById("engineSuccess").style.display="block";
-
-},
-
-function(){
-
-alert("Location permission allow karo");
 
 }
 
@@ -648,7 +678,7 @@ alert("Location permission allow karo");
 
 /* TYRE */
 
-function sendTyreRequest(){
+async function sendTyreRequest(){
 
 var name =
 document.getElementById("tyreName").value;
@@ -681,8 +711,8 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
-var imageName =
-image ? image.name : "No Image";
+var imageURL =
+await uploadImage(image);
 
 await saveRequest(
 "Tyre",
@@ -690,7 +720,7 @@ name,
 phone,
 service,
 location,
-imageName
+imageURL
 );
 
 var message =
@@ -699,7 +729,7 @@ var message =
 "%0A📞 Mobile: "+phone+
 "%0A🔧 Service: "+service+
 "%0A📍 Location: "+location+
-"%0A🖼 Vehicle Image: "+imageName;
+"%0A🖼 Vehicle Image: "+imageURL;
 
 window.open(
 "https://wa.me/917428069969?text="+message,
@@ -707,12 +737,6 @@ window.open(
 );
 
 document.getElementById("tyreSuccess").style.display="block";
-
-},
-
-function(){
-
-alert("Location permission allow karo");
 
 }
 
@@ -722,7 +746,7 @@ alert("Location permission allow karo");
 
 /* EMERGENCY */
 
-function sendEmergencyRequest(){
+async function sendEmergencyRequest(){
 
 var name =
 document.getElementById("emergencyName").value;
@@ -755,8 +779,8 @@ var lon = position.coords.longitude;
 var location =
 "https://maps.google.com/?q="+lat+","+lon;
 
-var imageName =
-image ? image.name : "No Image";
+var imageURL =
+await uploadImage(image);
 
 await saveRequest(
 "Emergency",
@@ -764,7 +788,7 @@ name,
 phone,
 service,
 location,
-imageName
+imageURL
 );
 
 var message =
@@ -773,7 +797,7 @@ var message =
 "%0A📞 Mobile: "+phone+
 "%0A⚠ Service: "+service+
 "%0A📍 Location: "+location+
-"%0A🖼 Vehicle Image: "+imageName;
+"%0A🖼 Vehicle Image: "+imageURL;
 
 window.open(
 "https://wa.me/917428069969?text="+message,
@@ -781,12 +805,6 @@ window.open(
 );
 
 document.getElementById("emergencySuccess").style.display="block";
-
-},
-
-function(){
-
-alert("Location permission allow karo");
 
 }
 
